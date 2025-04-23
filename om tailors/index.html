@@ -1,88 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Om Tailors - Dhoti Perfection Since 1974</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OM TAILOR - Dhoti Perfection Since 1974</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* Reset & Base */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Roboto', sans-serif; background-color: #1c1c1c; color: #f9f9f9; overflow-x: hidden; }
-    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #111;
+      color: #f4f1e8;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; color: #e5b24b; }
+    a { text-decoration: none; color: inherit; }
+
+    /* Section Styling */
+    section {
+      background: rgba(20,20,20,0.9);
+      border: 4px solid #e5b24b;
+      padding: 3rem 2rem;
+      margin: 2rem auto;
+      max-width: 1000px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+      animation: fadeInUp 1s ease forwards;
+      opacity: 0;
+    }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px);} to { opacity:1; transform: translateY(0);} }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed; bottom: 20px; right: 20px;
+      width: 60px; height: 60px; z-index: 1000;
+    }
+    .whatsapp-float img { width: 100%; height: 100%; }
+
+    /* Hero Section */
     .hero {
-      height: 100vh;
-      background: url('https://raw.githubusercontent.com/laxman-dev-ai/assets/main/omtailors/hero.jpg') center/cover no-repeat;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: gold;
+      position: relative; height: 100vh; width: 100%; overflow: hidden;
+      display: flex; justify-content: center; align-items: center; text-align: center;
     }
-    .hero h1 { font-size: 4rem; text-shadow: 2px 2px 8px black; }
-    .hero p { font-size: 1.2rem; margin-top: 1rem; }
-    .btn { background: maroon; color: white; padding: 10px 20px; margin-top: 20px; border: none; border-radius: 8px; cursor: pointer; }
-    .section { padding: 60px 20px; max-width: 1200px; margin: auto; }
-    .section img { max-width: 100%; border-radius: 12px; margin-bottom: 20px; }
-    .contact {
-      background: #2b2b2b;
-      padding: 30px;
-      text-align: center;
+    .hero video {
+      position: absolute; top: 50%; left: 50%;
+      width: 100%; height: 100%; object-fit: cover;
+      transform: translate(-50%, -50%);
+      filter: brightness(0.5) blur(4px);
+      z-index: -2;
     }
-    .footer { background: #000; color: #aaa; text-align: center; padding: 20px; }
-    iframe { width: 100%; height: 400px; border: none; }
+    .hero .overlay {
+      position: absolute; top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.4); z-index: -1;
+    }
+    .hero .hero-content {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: 1rem;
+      animation: fadeInUp 1s ease;
+    }
+    .hero .hero-content img.logo { width: 140px; }
+    .hero .hero-content h1.title {
+      font-size: 3.5rem; letter-spacing: 2px;
+    }
+    .hero .hero-content .btn {
+      margin-top: 1rem; padding: 0.8rem 1.8rem;
+      background: #7b3f00; color: #f4f1e8; border: none;
+      border-radius: 6px; font-weight: bold; transition: background 0.3s;
+      cursor: pointer;
+    }
+    .hero .hero-content .btn:hover { background: #a1571f; }
+
+    /* Gallery (Responsive) */
+    .gallery {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 1.5rem;
+    }
+    .gallery img, .gallery video {
+      width: 100%; height: auto; border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      animation: fadeInUp 1s ease forwards; opacity: 0;
+    }
+    .gallery video { display: block; }
+
+    /* Section Intro */
+    .section-intro { margin-bottom: 1rem; text-align: center; }
+    .section-intro h2 {
+      font-size: 2.5rem; position: relative;
+    }
+    .section-intro h2::after {
+      content: ''; display: block; width: 60px; height: 4px;
+      background: #e5b24b; margin: 0.5rem auto; border-radius: 2px;
+    }
+
+    /* Contact & Map */
+    #contact p { margin-bottom: 0.5rem; }
+    #contact iframe {
+      width: 100%; height: 350px; border: none;
+      margin-top: 1rem; border-radius: 8px;
+    }
+
+    /* Footer */
+    footer {
+      padding: 2rem; text-align: center;
+      background: #000; color: #777; font-size: 0.9rem;
+    }
+    footer a { color: #e5b24b; }
+
+    /* Responsive Adjustments */
+    @media screen and (max-width: 600px) {
+      .hero .hero-content h1.title { font-size: 2.2rem; }
+      .hero .hero-content img.logo { width: 110px; }
+      section { padding: 2rem 1rem; }
+    }
   </style>
 </head>
 <body>
 
-<section class="hero">
-  <h1>Dhoti Perfection Since 1974</h1>
-  <p>Where Royal Tradition Meets Tailored Precision</p>
-  <button class="btn">Book Your Fit</button>
-</section>
+  <!-- WhatsApp Chat Button -->
+  <a href="https://wa.me/7073557312" class="whatsapp-float" target="_blank" rel="noopener">
+    <img src="assets/images/whatsapp-icon.png" alt="Chat on WhatsApp">
+  </a>
 
-<section class="section">
-  <h2>Our Legacy</h2>
-  <p>From the heart of Rajasthan to the wardrobes of legends. Om Tailors was started by Damraram Ji in 1974 with nothing but passion for perfection. Today, our name is synonymous with handcrafted royalty. Hitesh Solanki and Kishore Solanki continue this legacy of elite craftsmanship, dressing celebrities, politicians, and bhajan singers alike.</p>
-  <img src="https://raw.githubusercontent.com/laxman-dev-ai/assets/main/omtailors/shopboard.jpg" alt="Since 1974 Board" />
-</section>
+  <!-- Hero Section with Video Background -->
+  <section class="hero">
+    <video autoplay muted loop playsinline>
+      <source src="assets/images/hero.mp4" type="video/mp4">
+    </video>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <img src="assets/images/om.png" alt="OM Logo" class="logo">
+      <h1 class="title">OM TAILOR</h1>
+      <button class="btn" id="bookBtn">Book Your Fit</button>
+    </div>
+  </section>
 
-<section class="section">
-  <h2>Craft in Motion</h2>
-  <p>Our secret formula, perfected over decades, lies in precision and soul. Take a look inside our world.</p>
-  <img src="https://raw.githubusercontent.com/laxman-dev-ai/assets/main/omtailors/sewing-process.jpg" alt="Sewing Process" />
-</section>
+  <!-- Legacy Section -->
+  <section id="legacy">
+    <div class="section-intro"><h2>Our Legacy</h2></div>
+    <p>Since 1974, OM TAILOR has crafted timeless dhotis with devotion. Founded by Damraram Ji beneath the neem tree, our path from humble beginnings to royal wardrobes is woven with precision and soul. Today, Hitesh Solanki and Kishore Solanki honor this tradition.</p>
+    <div class="gallery">
+      <img src="assets/images/board.png.jpg" alt="Since 1974 Board">
+      <img src="assets/images/sewingmachine.png" alt="Sewing Machine">
+    </div>
+  </section>
 
-<section class="section">
-  <h2>Celebrity Clients</h2>
-  <p>Chotu Singh Rawna and other renowned personalities trust our heritage tailoring.</p>
-  <img src="https://raw.githubusercontent.com/laxman-dev-ai/assets/main/omtailors/chotu-singh.jpg" alt="Celebrity Client" />
-</section>
+  <!-- Craftsmanship Section -->
+  <section id="craft">
+    <div class="section-intro"><h2>Craft in Motion</h2></div>
+    <p>Witness our secret formula perfected over generations. Every stitch speaks of legacy.</p>
+    <div class="gallery">
+      <img src="assets/images/pngtree-manual-sew-machine-icon-simple-illustration-of-manual-sew-machine-icon-png-image_2017084.jpg" alt="Stitch Animation">
+      <img src="assets/images/sewing-process.jpg" alt="Sewing Process">
+    </div>
+  </section>
 
-<section class="section">
-  <h2>Tradition in Detail</h2>
-  <p>Every stitch speaks of tradition, with Rajasthani motifs, turbans, and custom dhotis stitched to perfection.</p>
-  <img src="https://www.pngwing.com/files/png/bheos.png" alt="Sewing Machine PNG" />
-  <img src="https://www.pngwing.com/files/png/dcczv.png" alt="Turban PNG" />
-</section>
+  <!-- Clients Section -->
+  <section id="clients">
+    <div class="section-intro"><h2>Our Clients</h2></div>
+    <p>Trusted by the esteemed—Chotu Singh Rawna and influencers alike.</p>
+    <div class="gallery">
+      <img src="assets/images/chotu.png.jpg" alt="Chotu Singh Rawna">
+      <img src="assets/images/fit.jpg" alt="Influencer in Dhoti">
+    </div>
+  </section>
 
-<section class="section">
-  <h2>Our Community</h2>
-  <img src="https://raw.githubusercontent.com/laxman-dev-ai/assets/main/omtailors/group-photo.jpg" alt="Group Photo" />
-</section>
+  <!-- Community Section with Dance Video and Desi.png -->
+  <section id="community">
+    <div class="section-intro"><h2>Our Community</h2></div>
+    <div class="gallery">
+      <video autoplay muted loop playsinline>
+        <source src="assets/images/dance.mp4" type="video/mp4">
+      </video>
+      <img src="assets/images/Desi.jpg" alt="Rajasthani Vibe">
+    </div>
+  </section>
 
-<section class="contact">
-  <h2>Visit Us</h2>
-  <p>Om Tailors Dhoti Collection, Nagar, Rajasthan</p>
-  <p>📞 Damraram Ji: <a href="tel:9460656682">9460656682</a></p>
-  <p>📞 Kishore Solanki: <a href="tel:9950839248">9950839248</a></p>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.521660140101!2d71.7400806!3d25.2519452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x394489f544907d3d%3A0xa305fce55d416c26!2sOM%20TAILORS%20DHOTI%20COLLECTION%20NAGAR!5e0!3m2!1sen!2sin!4v1713856356909!5m2!1sen!2sin" allowfullscreen=""></iframe>
-</section>
+  <!-- Contact & Map -->
+  <section id="contact">
+    <div class="section-intro"><h2>Visit & Connect</h2></div>
+    <p>OM TAILOR Dhoti Collection, Nagar Village, Rajasthan</p>
+    <p>📞 Damraram Ji: <a href="tel:9460656682">9460656682</a></p>
+    <p>📞 Kishore Solanki: <a href="tel:9950839248">9950839248</a></p>
+    <p><a href="https://wa.me/7073557312">Chat with us on WhatsApp</a></p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3683.521660140101!2d71.7400806!3d25.2519452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x394489f544907d3d%3A0xa305fce55d416c26!2sOM%20TAILORS%20DHOTI%20COLLECTION%20NAGAR!5e0!3m2!1sen!2sin!4v1713856356909!5m2!1sen!2sin" allowfullscreen></iframe>
+  </section>
 
-<footer class="footer">
-  <p>Follow us: @omtailornagar (Instagram & Facebook)</p>
-  <p>© Om Tailors 1974 - Present</p>
-</footer>
+  <!-- Footer -->
+  <footer>
+    <p>Connect with us: <a href="https://www.instagram.com/omtailornagar/" target="_blank">@omtailornagar</a> | <a href="https://www.facebook.com/omtailornagar" target="_blank">Facebook</a></p>
+    <p>© OM TAILOR 1974 - Present</p>
+  </footer>
 
+  <script>
+    document.getElementById('bookBtn').addEventListener('click', function() {
+      document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
